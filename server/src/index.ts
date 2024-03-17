@@ -14,7 +14,9 @@ app.post('/api/v1/user/signup', async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
+
   const body = await c.req.json();
+  
   const exist = await prisma.user.findFirst({
     where: {
       email: body.email
@@ -26,6 +28,7 @@ app.post('/api/v1/user/signup', async (c) => {
     c.status(403);
     return c.json({ error: `User with this email ${exist} already exists` })
   }
+  
   try {
     const create = await prisma.user.create({
       data: {
@@ -35,7 +38,7 @@ app.post('/api/v1/user/signup', async (c) => {
       }
     });
     const token = await sign({id: create.id}, c.env.JWT_SECRET);
-    return c.json({Token: token})
+    return c.json({ token })
   } catch {
     c.status(403);
     return c.json({
@@ -44,8 +47,31 @@ app.post('/api/v1/user/signup', async (c) => {
   }
 })
 
-app.post('/api/v1/user/signin', (c) => {
-  return c.text('h')
+app.post('/api/v1/user/signin', async (c) => {
+
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const body = await c.req.json();
+
+  const exist = await prisma.user.findUnique({
+    where: {
+      email: body.email,
+      password: body.password
+    }
+  })
+
+  if(!exist) {
+    c.status(403);
+    return c.json({
+      error: "User not found"
+    })
+  }
+
+  const token = await sign({ id: exist.id }, c.env.JWT_SECRET);
+
+  return c.json({ token });
 })
 
 app.post('/api/v1/blog', (c) => {
