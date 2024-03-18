@@ -6,9 +6,29 @@ import { sign, verify, decode } from 'hono/jwt'
 const app = new Hono<{
   Bindings: {
     DATABASE_URL: string,
-    JWT_SECRET: string
+    JWT_SECRET: string,
+  }, Variables : {
+    userId: string
   }
-}>()
+}>();
+
+app.use("/api/v1/blog/*", async (c, next) => {
+  const header = c.req.header("authorization");
+
+  if (!header || !header.startsWith("Bearer ")) {
+    c.status(403);
+    return c.json({ error: "Invalid token" })
+  }
+  const token = header?.split(" ")[1];
+  try {
+    const verified = await verify(token, c.env.JWT_SECRET)
+    c.set('userId', verified.id)
+    await next()
+  } catch {
+    c.status(401);
+  return c.json({ error: "User not authorized" });
+  }
+});
 
 app.post('/api/v1/user/signup', async (c) => {
   const prisma = new PrismaClient({
@@ -75,7 +95,8 @@ app.post('/api/v1/user/signin', async (c) => {
 })
 
 app.post('/api/v1/blog', (c) => {
-  return c.text('h')
+  const id = c.get('userId')
+  return c.text(id)
 })
 
 app.put('/api/v1/blog', (c) => {
