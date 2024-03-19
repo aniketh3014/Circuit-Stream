@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { sign, verify, decode } from 'hono/jwt'
 import { userRouter } from './routes/user';
+import { bufferToString } from 'hono/utils/buffer';
 
 const app = new Hono<{
   Bindings: {
@@ -60,8 +61,24 @@ app.post('/api/v1/blog', async (c) => {
 return c.text('id')
 })
 
-app.put('/api/v1/blog', (c) => {
-  return c.text('h')
+app.put('/api/v1/blog', async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const userId = c.get('userId');
+  const body = await c.req.json();
+  await prisma.post.update({
+    where: {
+      id: body.id,
+      authorId: userId
+    },
+    data: {
+      title: body.title,
+      content: body.content 
+    }
+  })
+  return c.json({ message: "Post updated successfully" })
 })
 
 app.get('/api/v1/blog/:id', (c) => {
