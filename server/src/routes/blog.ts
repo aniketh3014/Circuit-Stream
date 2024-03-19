@@ -72,16 +72,16 @@ blogRouter.put('/', async (c) => {
     return c.json({ message: "Post updated successfully" })
 })
   
-blogRouter.get('/search', async (c) => {
+blogRouter.get('/get/:id', async (c) => {
 
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate());
 
-    const body = await c.req.json()
+    const id = c.req.param('id')
     const post = await prisma.post.findUnique({
       where: {
-        id: body.id
+        id: id
       }
     });
     return c.json(post);
@@ -99,7 +99,7 @@ blogRouter.get('/bulk', async (c) => {
     return c.json({posts: posts});
     } catch (e){
     c.status(402);
-    return c.json({error: e})
+    return c.json({error: e});
     }
 
 })
