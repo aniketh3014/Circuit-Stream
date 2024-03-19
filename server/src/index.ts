@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { sign, verify, decode } from 'hono/jwt'
+import { userRouter } from './routes/user';
 
 const app = new Hono<{
   Bindings: {
@@ -11,6 +12,8 @@ const app = new Hono<{
     userId: string
   }
 }>();
+
+
 
 app.use("/api/v1/blog/*", async (c, next) => {
   const header = c.req.header("authorization");
@@ -30,73 +33,31 @@ app.use("/api/v1/blog/*", async (c, next) => {
   }
 });
 
-app.post('/api/v1/user/signup', async (c) => {
-  const prisma = new PrismaClient({
-    datasourceUrl: c.env.DATABASE_URL,
-  }).$extends(withAccelerate());
+app.route('/api/v1/user', userRouter);
+// app.route('/api/v1/blog', blogRouter);
 
-  const body = await c.req.json();
-  
-  const exist = await prisma.user.findFirst({
-    where: {
-      email: body.email
-    }, select: {
-      email: true
-    }
-  })
-  if (exist) {
-    c.status(403);
-    return c.json({ error: `User with this email ${exist} already exists` })
-  }
-  
-  try {
-    const create = await prisma.user.create({
-      data: {
-        email: body.email,
-        password: body.password,
-        username: body.username
-      }
-    });
-    const token = await sign({id: create.id}, c.env.JWT_SECRET);
-    return c.json({ token })
-  } catch {
-    c.status(403);
-    return c.json({
-      error: "Error while signing up"
-    });
-  }
-})
-
-app.post('/api/v1/user/signin', async (c) => {
+app.post('/api/v1/blog', async (c) => {
 
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
-
+  
+  const userId = c.get('userId');
   const body = await c.req.json();
 
-  const exist = await prisma.user.findUnique({
-    where: {
-      email: body.email,
-      password: body.password
+  const post = await prisma.post.create({
+    data: {
+      title: body.title,
+      content: body.content,
+      authorId: userId
     }
+  });
+
+  return c.json({
+    id: post.id
   })
-
-  if(!exist) {
-    c.status(403);
-    return c.json({
-      error: "User not found"
-    })
-  }
-
-  const token = await sign({ id: exist.id }, c.env.JWT_SECRET);
-
-  return c.json({ token });
-})
-
-app.post('/api/v1/blog', (c) => {
-  const id = c.get('userId')
-  return c.text(id)
+  
+return c.text('id')
 })
 
 app.put('/api/v1/blog', (c) => {
