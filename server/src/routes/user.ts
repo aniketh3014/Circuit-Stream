@@ -17,7 +17,6 @@ userRouter.post('/signup', async (c) => {
     }).$extends(withAccelerate());
   
     const body = await c.req.json();
-    
     const exist = await prisma.user.findFirst({
       where: {
         email: body.email
