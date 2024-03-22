@@ -3,7 +3,7 @@ import { SignupType } from "@aniketh3014/bolg-common/dist/index"
 import { useState } from "react";
 import { AuthInput } from "./AuthInputs"
 import axios from "axios"
-import { SERVER_URL } from "../config";
+import { SERVER_URL } from "../config.tsx";
 
 export const Auth = () => {
 
