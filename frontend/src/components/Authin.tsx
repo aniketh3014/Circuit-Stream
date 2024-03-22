@@ -1,15 +1,26 @@
-import { Link } from "react-router-dom"
-import { SignupType } from "@aniketh3014/bolg-common/dist/index"
+import { Link, useNavigate } from "react-router-dom"
+import { SigninType } from "@aniketh3014/bolg-common/dist/index"
 import { useState } from "react";
 import { AuthInput } from "./AuthInputs"
+import axios from "axios";
+import { SERVER_URL } from '../config.tsx';
 
-export const Auth = ({type}: { type: "signup" | "signin" }) => {
+export const Auth = () => {
 
-    const [text, setText] = useState<SignupType>({
+    const [text, setText] = useState<SigninType>({
         email: "",
         password: "",
-        username: ""
     });
+    const navigate = useNavigate()
+    async function Signin() {
+        try {
+            const response = await axios.post(`${SERVER_URL}/api/v1/user/signin`, text)
+            localStorage.setItem('token', response.data.token)
+            navigate("/blogs")
+        }catch(e) {
+            alert("Could not sign in")
+        }
+    } 
 
     return (
         <div className="flex flex-col justify-center h-screen bg-gray-100">
@@ -18,19 +29,13 @@ export const Auth = ({type}: { type: "signup" | "signin" }) => {
                 <div className="md:w-full">
                     <div className="p-8">
                         <div className="font-bold text-center text-3xl md:font-extrabold">
-                            {type === "signup" ? "Create an account" : "Welcome back!"}
+                            Welcome back!
                         </div>
                         <div className="text-gray-500 mt-2 text-center">
-                            {type === "signin" ? "Don't have an account?" : "Already have an account?"} 
-                            <Link className="underline text-gray-600" to={type === "signin" ? "/signup" : "/signin"}> {type === "signin" ? "Create one" : "Sign in"} </Link>
+                            Don't have an account?
+                            <Link className="underline text-gray-600" to={"/signup"}>Create one</Link>
                         </div>
                         <div className="mt-4 px-4">
-                           {type ==="signup" ? <AuthInput label="Username" placeholder="Enter your username" onChange={(e) =>
-                                setText(c => ({
-                                    ...c,
-                                    username: e.target.value
-                                }))
-                            }/> : null }
                             <AuthInput label="Email" placeholder="e@example.com" onChange={(e) =>
                                 setText(c => ({
                                     ...c,
@@ -43,7 +48,7 @@ export const Auth = ({type}: { type: "signup" | "signin" }) => {
                                     password: e.target.value
                                 }))
                             }/>
-                            <button type="button" className="w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-300 font-semibold rounded-lg text-sm px-5 py-3 mt-4">{type === "signup" ? "Sign up" : "Sign in"}</button>
+                            <button type="button" onClick={Signin} className="w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-300 font-semibold rounded-lg text-sm px-5 py-3 mt-4">Sign in</button>
                         </div>
                     </div>
                 </div>
