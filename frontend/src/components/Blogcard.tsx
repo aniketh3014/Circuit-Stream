@@ -30,7 +30,7 @@ export const Blogcard = ({
    <div className="text-2xl font-bold font-ui-sans-serif pt-3">
        {title}
    </div>
-   <div className="font-sans pt-2">
+   <div className="pt-2 font-serif">
        {content.slice(0, 150) + "..."}
    </div>
    <div className="text-gray-600 text-sm font-light pb-6 pt-7">

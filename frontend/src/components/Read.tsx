@@ -1,21 +1,17 @@
 import { Blog } from "../../atoms/blogsatom"
 
 export const Read = ({blog}:{blog: Blog}) => {
-    return <div className="grid grid-cols-12 w-full px-4 gap-2">
-        <div className="col-span-8 bg-red-200">
-            <div className="text-3xl font-extrabold">
+    return <div className="flex">
+        <div>
+            <div className="text-5xl font-bold">
                 {blog.title}
             </div>
-            <div>
+            <div className="text-gray-500 font-light pt-2">
                 posted on Feb 19, 2024
             </div>
-            <div>
+            <div className="text-gray-800 pt-3 text-lg font-serif">
                 {blog.content}
             </div>            
         </div>
-        <div className="col-span-4 bg-green-200">
-            this is user
-        </div>
-
     </div>
 }

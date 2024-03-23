@@ -5,7 +5,7 @@ interface type {
     username: string
 }
 export const Appbar = ({username}: type) => {
-    return <div className="border-b">
+    return <div className="border-b lg:px-4">
         <div className="w-full p-3 flex justify-between">
             <div>
                 <Logo />
