@@ -81,32 +81,7 @@ blogRouter.put('/', async (c) => {
   })
   return c.json({ message: "Post updated successfully" })
 })
-  
-blogRouter.get('/get/:id', async (c) => {
-
-  const prisma = new PrismaClient({
-    datasourceUrl: c.env.DATABASE_URL,
-  }).$extends(withAccelerate());
-
-  const id = c.req.param('id')
-  const post = await prisma.post.findUnique({
-    where: {
-      id: id
-    }, select: {
-      content: true,
-      title: true,
-      id: true,
-      author: {
-        select: {
-          username: true
-        }
-      }
-    }
-  });
-  return c.json(post);
-})
-  
-  
+    
 blogRouter.get('/bulk', async (c) => {
 
   const prisma = new PrismaClient({
