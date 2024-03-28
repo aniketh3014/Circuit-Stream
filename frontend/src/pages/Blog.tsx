@@ -17,7 +17,7 @@ export const Blog = () => {
     const blog = blogs?.contents
     return <div>
         <div>
-            <Appbar username="Aniket" />
+            <Appbar />
         </div>
         <div className="grid grid-cols-12 gap-4 lg:gap-2 pt-14">
             <div className="col-span-8 lg:pl-60 pl-9">

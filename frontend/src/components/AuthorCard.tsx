@@ -1,5 +1,5 @@
 import { Blog } from "../../atoms/blogsatom"
-import { Avatar } from "./UserAvatar"
+import { Avatar } from "./Avatar"
 
 export const AuthorCard = ({blog}: {blog:Blog}) => {
     return <div>
@@ -7,7 +7,7 @@ export const AuthorCard = ({blog}: {blog:Blog}) => {
             Author
         </div>
         <div className="font-bold text-2xl flex">
-        <div className="pr-3">
+        <div className="pr-3 font-normal">
             <Avatar username={blog.author.username} />
         </div>
             {blog.author.username}
