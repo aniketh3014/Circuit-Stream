@@ -9,7 +9,8 @@ export const blogRouter = new Hono<{
       DATABASE_URL: string,
       JWT_SECRET: string
   }, Variables: {
-      userId: string
+      userId: string,
+      name: string
   }
 }>();
 
@@ -24,6 +25,7 @@ blogRouter.use("/*", async (c, next) => {
   try {
     const verified = await verify(token, c.env.JWT_SECRET)
     c.set('userId', verified.id)
+    c.set('name', verified.username)
     await next()
   } catch {
     c.status(401);
@@ -106,4 +108,11 @@ blogRouter.get('/bulk', async (c) => {
   c.status(402);
   return c.json({error: e});
   }
+})
+
+blogRouter.get('/username', (c) => {
+  const name = c.get('name')
+  return c.json({
+    name: name
+  })
 })
