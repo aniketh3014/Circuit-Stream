@@ -10,23 +10,24 @@ export const Blog = () => {
 
     const blogs = id ? useRecoilValueLoadable(blogSelector(id)) : null
     if (blogs?.state === 'loading') {
-        return <div>
-            loading....
+        return <div className="flex justify-center items-center h-screen">
+            <div className="text-2xl">Loading...</div>
         </div>
     }
     const blog = blogs?.contents
-    return <div>
+    return <div className="bg-gray-100 min-h-screen">
         <div>
             <Appbar />
         </div>
-        <div className="grid grid-cols-12 gap-4 lg:gap-2 pt-14">
-            <div className="col-span-8 lg:pl-60 pl-9">
-                <Read blog={blog}/>
-            </div>
-            <div className="col-span-4 lg:pl-9">
-                <AuthorCard blog={blog} />
+        <div className="container mx-auto px-4 py-4">
+            <div className="grid grid-cols-12 gap-6">
+                <div className="col-span-12 lg:col-span-8 xl:col-span-8">
+                    <Read blog={blog}/>
+                </div>
+                <div className="col-span-12 lg:col-span-4 xl:col-span-4">
+                    <AuthorCard blog={blog} />
+                </div>
             </div>
         </div>
-
     </div>
 }
