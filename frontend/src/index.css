@@ -23,9 +23,6 @@
     p {
         @apply text-base;
     }
-    a {
-        @apply text-blue-500 hover:underline;
-    }
     blockquote {
         @apply border-l-4 border-gray-300 italic pl-4 py-2;
     }
