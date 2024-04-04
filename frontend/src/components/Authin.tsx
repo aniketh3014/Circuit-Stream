@@ -15,7 +15,7 @@ export const Auth = () => {
     async function Signin() {
         try {
             const response = await axios.post(`${SERVER_URL}/api/v1/user/signin`, text)
-            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('token',response.data.token)
             navigate("/blogs")
         }catch(e) {
             alert("Could not sign in")
@@ -39,13 +39,13 @@ export const Auth = () => {
                             <AuthInput label="Email" placeholder="e@example.com" onChange={(e) =>
                                 setText(c => ({
                                     ...c,
-                                    email: e.target.value
+                                    email: e.target.value.trim()
                                 }))
                             }/>
                             <AuthInput label="Password" placeholder="" type={"password"} onChange={(e) =>
                                 setText(c => ({
                                     ...c,
-                                    password: e.target.value
+                                    password: e.target.value.trim()
                                 }))
                             }/>
                             <button type="button" onClick={Signin} className="w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-300 font-semibold rounded-lg text-sm px-5 py-3 mt-4">Sign in</button>

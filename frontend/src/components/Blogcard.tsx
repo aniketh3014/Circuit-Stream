@@ -17,7 +17,7 @@ export const Blogcard = ({
     publishDate,
     id
 }: inProps) => {
-    return <Link to={`/blog/${id}`}><div className="w-screen lg:max-w-5xl max-w-xl cursor-pointer bg-white border-b border-gray-200 shadow-md">
+    return <Link to={`/blog/${id}`}><div className="w-screen lg:max-w-5xl max-w-xl cursor-pointer bg-white border-b border-gray-200 shadow">
     <div className="p-5 px-16">
    <div className="flex">
        <div className="flex flex-col justify-center">

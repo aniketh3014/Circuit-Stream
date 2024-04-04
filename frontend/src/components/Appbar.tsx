@@ -13,7 +13,7 @@ export const Appbar = () => {
         </div>
     }
     const name = initName?.contents
-    return <div className="border-b lg:px-4">
+    return <div className="border-b shadow lg:px-6">
         <div className="w-full p-3 flex justify-between">
         <Link to={'/blogs'}>
             <div>

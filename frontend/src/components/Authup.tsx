@@ -40,13 +40,13 @@ export const Auth = () => {
                            <AuthInput label="Username" placeholder="Enter your username" onChange={(e) =>
                                 setText(c => ({
                                     ...c,
-                                    username: e.target.value
+                                    username: e.target.value.trim()
                                 }))
                             }/>
                             <AuthInput label="Email" placeholder="e@example.com" onChange={(e) =>
                                 setText(c => ({
                                     ...c,
-                                    email: e.target.value
+                                    email: e.target.value.trim()
                                 }))
                             }/>
                             <AuthInput label="Password" placeholder="" type={"password"} onChange={(e) =>

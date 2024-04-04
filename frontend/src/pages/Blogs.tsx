@@ -14,7 +14,7 @@ export const Blogs = () => {
    const blog = blogs.contents
  return <div className="bg-gray-50 min-h-screen">
    <div className="bg-white">
-      <Appbar username="aniket"/>
+      <Appbar />
    </div>
    <div className="flex justify-center pt-4">
      <div>
