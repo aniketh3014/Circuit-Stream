@@ -3,16 +3,24 @@ import { Appbar } from "../components/Appbar"
 import { Blogcard } from "../components/Blogcard"
 import { blogAtom } from "../../atoms/blogsatom"
 import { Blog } from "../../atoms/blogsatom"
+import { BlogsSkeleton } from "../components/BlogsSkeleton"
 
 export const Blogs = () => {
    const blogs = useRecoilValueLoadable(blogAtom(""))
    if(blogs.state === 'loading') {
-      return <div>
-         loading
+      return <div className="flex justify-center pt-24">
+         <div className="flex flex-col justify-center">
+            <BlogsSkeleton />
+            <BlogsSkeleton />
+            <BlogsSkeleton />
+            <BlogsSkeleton />
+         </div>
       </div>
+      
    }
    const blog = blogs.contents
- return <div className="bg-gray-50 min-h-screen">
+ return <div>
+   <div className="bg-gray-50 min-h-screen">
    <div className="bg-white">
       <Appbar />
    </div>
@@ -24,5 +32,7 @@ export const Blogs = () => {
      </div>
    </div> 
    </div>
+ </div>
+ 
   
 }
