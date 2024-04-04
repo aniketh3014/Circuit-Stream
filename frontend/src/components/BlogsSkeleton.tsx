@@ -3,7 +3,7 @@ import { Dot } from "./Dot";
 export const BlogsSkeleton = () => {
     return (
         <div>
-            <div className="w-screen lg:max-w-5xl max-w-xl cursor-pointer bg-white border-b border-gray-200 shadow">
+            <div className="w-screen max-w-screen-lg cursor-pointer bg-white border-b border-gray-200 shadow">
                 <div className="p-5 px-16">
                     <div className="flex">
                         <div className="flex flex-col justify-center">

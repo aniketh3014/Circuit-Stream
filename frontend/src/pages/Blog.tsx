@@ -4,14 +4,22 @@ import { AuthorCard } from "../components/AuthorCard"
 import { Read } from "../components/Read"
 import { useParams } from "react-router-dom"
 import { useRecoilValueLoadable } from "recoil"
+import { ReadSkeleton } from "../components/ReadSkeleton"
 
 export const Blog = () => {
     const { id } = useParams()
 
     const blogs = id ? useRecoilValueLoadable(blogSelector(id)) : null
     if (blogs?.state === 'loading') {
-        return <div className="flex justify-center items-center h-screen">
-            <div className="text-2xl">Loading...</div>
+        return <div>
+            <div>
+                <Appbar/>
+            </div>
+            <div>
+            <div>
+                <ReadSkeleton />
+            </div>
+        </div>
         </div>
     }
     const blog = blogs?.contents

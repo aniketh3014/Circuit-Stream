@@ -8,13 +8,21 @@ import { BlogsSkeleton } from "../components/BlogsSkeleton"
 export const Blogs = () => {
    const blogs = useRecoilValueLoadable(blogAtom(""))
    if(blogs.state === 'loading') {
-      return <div className="flex justify-center pt-24">
+      return <div>
+         <div>
+            <Appbar />
+         </div>
+         <div className="flex justify-center pt-24">
          <div className="flex flex-col justify-center">
             <BlogsSkeleton />
             <BlogsSkeleton />
             <BlogsSkeleton />
             <BlogsSkeleton />
+            <BlogsSkeleton />
+            <BlogsSkeleton />
+            <BlogsSkeleton />
          </div>
+      </div>
       </div>
       
    }
