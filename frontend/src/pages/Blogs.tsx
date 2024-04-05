@@ -35,7 +35,7 @@ export const Blogs = () => {
    <div className="flex justify-center pt-4">
      <div>
       {blog.map((blog: Blog)  => 
-         <Blogcard username={blog.author.username} title={blog.title} content={blog.content} id={blog.id} publishDate="15 Feb 2004" />
+         <Blogcard key={blog.id} username={blog.author.username} title={blog.title} content={blog.content} id={blog.id} publishDate="15 Feb 2004" />
       )}
      </div>
    </div> 

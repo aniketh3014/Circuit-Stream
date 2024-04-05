@@ -5,23 +5,22 @@ import { Blog } from "./pages/Blog";
 import { Blogs } from "./pages/Blogs";
 import { Create } from "./pages/Create"
 import { RecoilRoot } from "recoil";
+import { ProtectedRoute } from "./components/ProtectedRoutes";
 function App() {
-
   return (
-    <>
     <RecoilRoot>
-      <BrowserRouter>
+    <BrowserRouter>
         <Routes>
-          <Route path="/signup" element={<Signup />}/>
-          <Route path="/signin" element={<Signin />}/>
-          <Route path="/blog/:id" element={<Blog />}/>
-          <Route path="/blogs" element={<Blogs />}/>
-          <Route path="/create" element={<Create/>}/>
+            <Route path="/" element={<ProtectedRoute><Blogs /></ProtectedRoute>} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/blog/:id" element={<ProtectedRoute><Blog /></ProtectedRoute>} />
+            <Route path="/blogs" element={<ProtectedRoute><Blogs /></ProtectedRoute>} />
+            <Route path="/create" element={<ProtectedRoute><Create /></ProtectedRoute>} />
         </Routes>
-      </BrowserRouter>
-      </RecoilRoot>
-    </>
-  )
+    </BrowserRouter>
+</RecoilRoot>
+  );
 }
 
 export default App
