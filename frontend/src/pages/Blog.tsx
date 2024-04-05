@@ -44,7 +44,7 @@ export const Blog = () => {
             </div>
             <div className="container mx-auto px-4 py-4">
                 <div className="grid grid-cols-12 gap-6">
-                    <div className="col-span-12 lg:col-span-9 px-8">
+                    <div className="col-span-12 lg:col-span-9 px-8" style={{ maxWidth: '900px' }}>
                         <Read blog={blog} />
                     </div>
                     <div className="col-span-12 lg:col-span-3">

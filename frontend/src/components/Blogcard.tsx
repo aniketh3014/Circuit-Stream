@@ -38,7 +38,7 @@ export const Blogcard = ({
                     </div>
                     <div>
                         <div
-                            className="pt-2 font-serif"
+                            className="pt-2"
                             dangerouslySetInnerHTML={{
                                 __html: content.slice(0, 150) + "..."
                             }}

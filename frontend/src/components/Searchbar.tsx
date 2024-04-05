@@ -13,7 +13,7 @@ export const Searchbar = () => {
         </div>
             <input onChange={(e) => {
                 setKeyword(e.target.value)
-            }} type="text" placeholder="Serch keywords" className="pl-10 pr-4 py-2 w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"/>
+            }} type="text" placeholder="Serch keywords" className="lg:pl-10 pl-8 py-2 w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"/>
         </div>
         </div>
     )

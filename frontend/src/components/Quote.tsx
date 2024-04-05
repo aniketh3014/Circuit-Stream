@@ -9,7 +9,7 @@ export const Quote = () => {
                     Aniket Ghosh
                 </div>
                 <div className="px-2 font-semibold text-sm text-gray-400">
-                    CEO | SSiT
+                    CEO | LIFE
                 </div>
             </div>
         </div>

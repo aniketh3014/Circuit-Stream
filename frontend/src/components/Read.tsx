@@ -10,7 +10,7 @@ export const Read = ({blog}:{blog: Blog}) => {
             <div className="text-gray-500 font-light pt-2">
                 posted on Feb 19, 2024
             </div>
-            <div className="text-gray-800 pt-4 bg-gray-100">
+            <div className="text-gray-800 pt-6 bg-gray-100">
                 {parse(blog.content)}
             </div>            
         </div>
