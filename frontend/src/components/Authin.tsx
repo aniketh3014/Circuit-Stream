@@ -4,9 +4,11 @@ import { useState } from "react";
 import { AuthInput } from "./AuthInputs"
 import axios from "axios";
 import { SERVER_URL } from '../config.tsx';
+import { statusAtom } from "../../atoms/statusAtom.tsx";
+import { useSetRecoilState } from "recoil";
 
 export const Auth = () => {
-
+    const status = useSetRecoilState(statusAtom)
     const [text, setText] = useState<SigninType>({
         email: "",
         password: "",
@@ -16,6 +18,7 @@ export const Auth = () => {
         try {
             const response = await axios.post(`${SERVER_URL}/api/v1/user/signin`, text)
             localStorage.setItem('token',response.data.token)
+            status(true)
             navigate("/blogs")
         }catch(e) {
             alert("Could not sign in")
