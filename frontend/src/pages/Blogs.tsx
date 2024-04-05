@@ -1,12 +1,12 @@
 import { useRecoilValueLoadable } from "recoil"
 import { Appbar } from "../components/Appbar"
 import { Blogcard } from "../components/Blogcard"
-import { blogAtom } from "../../atoms/blogsatom"
 import { Blog } from "../../atoms/blogsatom"
 import { BlogsSkeleton } from "../components/BlogsSkeleton"
+import { searchSelector } from "../../atoms/searchSelector"
 
 export const Blogs = () => {
-   const blogs = useRecoilValueLoadable(blogAtom(""))
+   const blogs = useRecoilValueLoadable(searchSelector(''))
    if(blogs.state === 'loading') {
       return <div>
          <div>

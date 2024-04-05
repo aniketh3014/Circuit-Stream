@@ -6,6 +6,7 @@ import { userAtom } from "../../atoms/UserAtom";
 import { LogoutButton } from "./LogoutButton";
 import { CreateButton } from "./CreateButton";
 import { PublishButton } from "./PublishButton";
+import { Searchbar } from "./Searchbar";
 
 export const Appbar = () => {
     const initName = useRecoilValueLoadable(userAtom);
@@ -24,11 +25,15 @@ export const Appbar = () => {
     return (
         <div className="border-b shadow lg:px-6">
             <div className="w-full p-3 flex justify-between">
+                <div className="flex">
                 <Link to="/blogs">
-                    <div>
-                        <Logo />
-                    </div>
+                    <Logo />
                 </Link>
+                <div className="flex flex-col justify-center pl-6">
+                    {location.pathname === "/blogs" && <Searchbar />}   
+                </div>
+                </div>
+                
                 <div className="flex justify-center pt-2">
                     {location.pathname === "/blogs" && <CreateButton />}
                     {location.pathname === "/create" && <PublishButton />}
