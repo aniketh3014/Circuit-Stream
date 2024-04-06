@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { Signin } from "./pages/Signin";
 import { Signup } from "./pages/Signup";
 import { Blog } from "./pages/Blog";
@@ -21,7 +21,7 @@ function RedirectToBlogs() {
 function App() {
   return (
     <RecoilRoot>
-    <BrowserRouter>
+    <HashRouter>
         <Routes>
             <Route path="/" element={<RedirectToBlogs />} />
             <Route path="/signup" element={<Signup />} />
@@ -30,7 +30,7 @@ function App() {
             <Route path="/blogs" element={<ProtectedRoute><Blogs /></ProtectedRoute>} />
             <Route path="/create" element={<ProtectedRoute><Create /></ProtectedRoute>} />
         </Routes>
-    </BrowserRouter>
+    </HashRouter>
 </RecoilRoot>
   );
 }
