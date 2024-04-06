@@ -3,20 +3,10 @@ import { Appbar } from "../components/Appbar";
 import { AuthorCard } from "../components/AuthorCard";
 import { Read } from "../components/Read";
 import { useParams } from "react-router-dom";
-import { useRecoilValueLoadable, useRecoilValue } from "recoil";
+import { useRecoilValueLoadable } from "recoil";
 import { ReadSkeleton } from "../components/ReadSkeleton";
-import { statusAtom } from "../../atoms/statusAtom";
-import { useEffect } from "react";
 
 export const Blog = () => {
-    const status = useRecoilValue(statusAtom);
-
-    useEffect(() => {
-        if (status) {
-            window.location.reload();
-        }
-    }, [status]);
-
     const { id } = useParams();
     const blogs = id ? useRecoilValueLoadable(blogSelector(id)) : null;
 

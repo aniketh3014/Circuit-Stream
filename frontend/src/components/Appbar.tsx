@@ -27,20 +27,19 @@ export const Appbar = () => {
             <div className="w-full p-3 flex justify-between">
                 <div className="flex">
                     <div className="flex flex-col justify-center">
-                    <Link to="/blogs">
-                    <Logo />
-                </Link>
+                        <Link to="/blogs">
+                            <Logo />
+                        </Link>
                     </div>
-                
-                <div className="flex flex-col justify-center lg:pl-6 pl-1 pr-2">
-                    {location.pathname === "/blogs" && <Searchbar />}   
+
+                    <div className="flex flex-col justify-center lg:pl-6 pl-1 pr-2">
+                        {location.pathname === "/blogs" && <Searchbar />}
+                    </div>
                 </div>
-                </div>
-                
+
                 <div className="flex justify-center pt-2">
-                    {location.pathname === "/blogs" && <CreateButton />}
-                    {location.pathname === "/create" && <PublishButton />}
-                    {location.pathname === "/blog" && <CreateButton />}
+                    {location.pathname == "/blogs" && <CreateButton />}
+                    {location.pathname == "/create" && <PublishButton />}
                     <div className="lg:px-4">
                         <LogoutButton />
                     </div>

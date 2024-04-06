@@ -15,10 +15,10 @@ export const CreateArea = () => {
                 onChange={(e) => setTitle(e.target.value.trim())}
                 placeholder="Title"
             />
-            <div className="w-full border border-gray-200 rounded-lg">
+            <div className="w-full">
                 <ReactQuill 
                     onChange={setContent} 
-                    className="h-96 bg-white border-none rounded-lg placeholder-gray-500"
+                    className="h-screen bg-white border-none border-transparent rounded-lg placeholder-gray-500"
                 />
             </div>
         </div>

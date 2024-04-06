@@ -1,8 +1,15 @@
-import { Navigate } from 'react-router-dom';
 import { isAuth } from './isAuth';
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
+    const navigate = useNavigate();
     const authenticated = isAuth();
 
-    return authenticated ? <Navigate to="/blogs" /> : <Navigate to="/signin" />;
+    if (authenticated) {
+        navigate('/blogs');
+    } else {
+        navigate('/signin');
+    }
+
+    return null;
 };

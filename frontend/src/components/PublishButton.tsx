@@ -6,13 +6,13 @@ import { ContentAtom, TitleAtom } from "../../atoms/InputAtoms";
 
 export const PublishButton = () => {
     const navigate = useNavigate();
-    const jwt = localStorage.getItem("token");
     const title = useRecoilValue(TitleAtom);
     const content = useRecoilValue(ContentAtom);
     const trimmedContent = content.trim();
     const trimmedTitle = title.trim();
 
     const handleSubmit = async () => {
+        const jwt = localStorage.getItem("token");
         await axios.post(
             `${SERVER_URL}/api/v1/blog`,
             {

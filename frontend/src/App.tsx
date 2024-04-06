@@ -6,12 +6,24 @@ import { Blogs } from "./pages/Blogs";
 import { Create } from "./pages/Create"
 import { RecoilRoot } from "recoil";
 import { ProtectedRoute } from "./components/ProtectedRoutes";
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+function RedirectToBlogs() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate('/blogs');
+  }, [navigate]);
+
+  return null;
+}
 function App() {
   return (
     <RecoilRoot>
     <BrowserRouter>
         <Routes>
-            <Route path="/" element={<ProtectedRoute><Blogs /></ProtectedRoute>} />
+            <Route path="/" element={<RedirectToBlogs />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/blog/:id" element={<ProtectedRoute><Blog /></ProtectedRoute>} />
